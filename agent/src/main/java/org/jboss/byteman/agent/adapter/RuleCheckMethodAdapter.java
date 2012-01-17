@@ -124,11 +124,11 @@ public class RuleCheckMethodAdapter extends RuleMethodAdapter {
                 }
             } else if (binding.isThrowable()) {
                 // we can only allow reference to the current throwable in an AT THROW rule
-                if (rule.getTargetLocation().getLocationType() != LocationType.THROW) {
+                if (rule.getTargetLocation().getLocationType() != LocationType.THROW && rule.getTargetLocation().getLocationType() != LocationType.CATCH) {
                     if (Transformer.isVerbose()) {
-                        System.out.println("RuleCheckMethodAdapter.checkBindings : found throwable value binding " + binding + " in rule which is not AT THROW " + rule.getName());
+                        System.out.println("RuleCheckMethodAdapter.checkBindings : found throwable value binding " + binding + " in rule which is not AT THROW/CATCH " + rule.getName());
                     }
-                    transformContext.warn(name, descriptor, "found throwable value binding " + binding + " in rule which is not AT THROW");
+                    transformContext.warn(name, descriptor, "found throwable value binding " + binding + " in rule which is not AT THROW/CATCH");
                 }
                 // we will need to set the descriptor at some point
             } else if (binding.isParamArray()) {
